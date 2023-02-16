@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/home', (req, res) => {
+app.get('/Carnaval/home', (req, res) => {
     // Lê o arquivo home.html
     fs.readFile('app/src/home/home.html', (err, data) => {
       if (err) {
