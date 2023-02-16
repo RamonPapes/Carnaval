@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.get('/home', (req, res) => {
     // Lê o arquivo home.html
-    fs.readFile('/home/ramonpapes/codes/NEM/client-side/carnaval/Carnaval/app/src/home/home.html', (err, data) => {
+    fs.readFile('app/src/home/home.html', (err, data) => {
       if (err) {
         // Se houver um erro, envia uma mensagem de erro ao navegador
         res.status(500).send('Ocorreu um erro ao ler o arquivo home.html');
