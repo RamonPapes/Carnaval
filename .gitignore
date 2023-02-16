@@ -21,7 +21,6 @@ yarn-error.log*
 
 # Arquivos de build
 build/
-dist/
 coverage/
 
 # Arquivos de ambiente
