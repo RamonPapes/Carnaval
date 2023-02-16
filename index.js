@@ -1,72 +1,32 @@
-// import express from 'express';
-// import fs from 'fs';
+const routes = [
+  { path: '/', page: 'index.html' },
+  { path: '/Carnaval/home', page: '/app/src/home/home.html' },
+];
 
-// const app = express();
+function handleRoute() {
+    const path = window.location.pathname;
+    const route = routes.find((r) => r.path === path);
+    console.log(route);
+    if (route) {
+        fetch(route.page)
+        .then((response) => response.text())
+        .then((html) => {
+            const container = document.getElementById('container');
+            container.innerHTML = html;
+        })
+        .catch((error) => {
+            console.error(`Failed to load page: ${route.page}. Error: ${error}`);
+        });
+    } else {
+        console.error(`No route found for path: ${path}`);
+    }
+}
 
-// Seleciona o botão
+
 const btnHome = document.getElementById('btnHome');
 
 btnHome.addEventListener('click', () => {
   window.location.href = '/Carnaval/home';
+  window.addEventListener('popstate', handleRoute);
+  handleRoute();
 });
-
-// app.get('/', (req, res) => {
-//   // Lê o arquivo index.html
-//   fs.readFile('index.html', (err, data) => {
-//     if (err) {
-//       // Se houver um erro, envia uma mensagem de erro ao navegador
-//       res.status(500).send('Ocorreu um erro ao ler o arquivo index.html');
-//     } else {
-//       // Se o arquivo for lido com sucesso, envia o conteúdo do arquivo como resposta
-//       res.setHeader('Content-Type', 'text/html');
-//       res.send(data);
-//     }
-//   });
-// });
-
-// app.get('/Carnaval/home', (req, res) => {
-//     // Lê o arquivo home.html
-//     fs.readFile('app/src/home/home.html', (err, data) => {
-//       if (err) {
-//         // Se houver um erro, envia uma mensagem de erro ao navegador
-//         res.status(500).send('Ocorreu um erro ao ler o arquivo home.html');
-//       } else {
-//         // Se o arquivo for lido com sucesso, envia o conteúdo do arquivo como resposta
-//         res.setHeader('Content-Type', 'text/html');
-//         res.send(data);
-//       }
-//     });
-// });
-
-// app.listen(3000, () => {
-//   console.log('Servidor iniciado na porta 3000');
-// });
-
-
-
-
-
-// const express = require('express');
-// const app = express();
-// const path = require('path');
-
-// // Define a porta a ser usada pelo servidor
-// const PORT = process.env.PORT || 3000;
-
-// // Define a pasta onde os arquivos estáticos da aplicação estão localizados
-// app.use(express.static(path.join(__dirname, 'dist')));
-
-// // Configura uma rota para a página inicial
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'dist', '/app/src/html/index.html'));
-// });
-
-// // Configura uma rota para a página home
-// app.get('/home', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'dist', '/app/src/html/home.html'));
-// });
-
-// // Inicia o servidor
-// app.listen(PORT, function () {
-//   console.log('Servidor iniciado na porta ' + PORT);
-// });
