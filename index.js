@@ -3,6 +3,13 @@ const fs = require('fs');
 
 const app = express();
 
+// Seleciona o botão
+const btnHome = document.getElementById('btnHome');
+
+btnHome.addEventListener('click', () => {
+  window.location.href = '/Carnaval/home';
+});
+
 // app.get('/', (req, res) => {
 //   // Lê o arquivo index.html
 //   fs.readFile('index.html', (err, data) => {
@@ -31,18 +38,13 @@ app.get('/Carnaval/home', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-  console.log('Servidor iniciado na porta 3000');
-});
+// app.listen(3000, () => {
+//   console.log('Servidor iniciado na porta 3000');
+// });
 
-// Seleciona o botão
-const btnHome = document.getElementById('btnHome');
 
-// Define um manipulador de eventos para o evento 'click'
-btnHome.addEventListener('click', () => {
-  // Navega até a rota /home
-  window.location.href = '/Carnaval/home';
-});
+
+
 
 // const express = require('express');
 // const app = express();
