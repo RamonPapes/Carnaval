@@ -1,0 +1,24 @@
+{
+  "name": "carnaval",
+  "version": "1.0.0",
+  "description": "Atividade do curso técnico, foi solicitado criar uma página para expor o carnaval de Salvador no ano de 2023 com uma página para cada circuito e uma home para escolher qual página abrir",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build && mv dist/* . && rm -rf dist && node index.js",
+    "predeploy": "npm run build",
+    "deploy": "echo '' > CNAME && git add . && git commit -m 'Deploying to GitHub Pages' && git push --force git@https://github.com/RamonPapes/Carnaval.git master:gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RamonPapes/Carnaval.git"
+  },
+  "author": "Ramon Papes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RamonPapes/Carnaval/issues"
+  },
+  "homepage": "https://github.com/RamonPapes/Carnaval#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
