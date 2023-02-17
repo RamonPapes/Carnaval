@@ -1,32 +1,35 @@
-const routes = [
-  { path: '/', page: 'index.html' },
-  { path: '/Carnaval/home', page: '/app/src/home/home.html' },
-];
+const express = require('express');
+const fs = require('fs');
 
-function handleRoute() {
-    const path = window.location.pathname;
-    const route = routes.find((r) => r.path === path);
-    console.log(route);
-    if (route) {
-        fetch(route.page)
-        .then((response) => response.text())
-        .then((html) => {
-            const container = document.getElementById('container');
-            container.innerHTML = html;
-        })
-        .catch((error) => {
-            console.error(`Failed to load page: ${route.page}. Error: ${error}`);
-        });
+const app = express();
+app.get('/', (req, res) => {
+  // Lê o arquivo index.html
+  fs.readFile('index.html', (err, data) => {
+    if (err) {
+      // Se houver um erro, envia uma mensagem de erro ao navegador
+      res.status(500).send('Ocorreu um erro ao ler o arquivo index.html');
     } else {
-        console.error(`No route found for path: ${path}`);
+      // Se o arquivo for lido com sucesso, envia o conteúdo do arquivo como resposta
+      res.setHeader('Content-Type', 'text/html');
+      res.send(data);
     }
-}
+  });
+});
 
+app.get('/home', (req, res) => {
+    // Lê o arquivo home.html
+    fs.readFile('app/src/home/home.html', (err, data) => {
+      if (err) {
+        // Se houver um erro, envia uma mensagem de erro ao navegador
+        res.status(500).send('Ocorreu um erro ao ler o arquivo home.html');
+      } else {
+        // Se o arquivo for lido com sucesso, envia o conteúdo do arquivo como resposta
+        res.setHeader('Content-Type', 'text/html');
+        res.send(data);
+      }
+    });
+  });
 
-const btnHome = document.getElementById('btnHome');
-
-btnHome.addEventListener('click', () => {
-  window.location.href = '/Carnaval/home';
-  window.addEventListener('popstate', handleRoute);
-  handleRoute();
+app.listen(3000, () => {
+  console.log('Servidor iniciado na porta 3000');
 });
